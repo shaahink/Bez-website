@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bruce Nemeth - Artist Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- PhotoSwipe CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe.min.css"
+      integrity="sha512-LFWtdAXHQuwUGH9cImO9blA3a3GfQNkpF2uRlhaOpSbDevNyK1rmAjs13mtpjvWyi+flP7zYWboqY+8Mkd42xA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="bg-[#F5F5F5] text-[#1A1A1A] font-sans">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 w-full bg-[#F5F5F5]/90 backdrop-blur-sm z-50 border-b border-[#E5E5E5]"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+          <a href="#hero" class="font-serif text-xl">Bruce Nemeth</a>
+          <div class="hidden md:flex space-x-8">
+            <a href="#about" class="hover:text-[#666666] transition-colors"
+              >About</a
+            >
+            <a href="#statement" class="hover:text-[#666666] transition-colors"
+              >Statement</a
+            >
+            <a href="#portfolio" class="hover:text-[#666666] transition-colors"
+              >Portfolio</a
+            >
+            <a href="#contact" class="hover:text-[#666666] transition-colors"
+              >Contact</a
+            >
+          </div>
+          <button id="mobile-menu-button" class="md:hidden">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-[#F5F5F5] border-t border-[#E5E5E5]"
+      >
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-3">
+          <a href="#about" class="hover:text-[#666666] transition-colors"
+            >About</a
+          >
+          <a href="#statement" class="hover:text-[#666666] transition-colors"
+            >Statement</a
+          >
+          <a href="#portfolio" class="hover:text-[#666666] transition-colors"
+            >Portfolio</a
+          >
+          <a href="#contact" class="hover:text-[#666666] transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="hero"
+      class="min-h-screen flex items-center justify-center relative"
+    >
+      <div class="absolute inset-0 overflow-hidden">
+        <img
+          src="images/bruce-main.JPG"
+          alt="Bruce Nemeth"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/20"></div>
+      </div>
+      <div class="relative z-10 text-center text-white px-6">
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
+          Bruce Nemeth
+        </h1>
+        <p class="text-xl md:text-2xl max-w-2xl mx-auto">
+          Interdisciplinary Artist
+        </p>
+        <div class="mt-12 animate-bounce">
+          <a href="#about" class="inline-block">
+            <svg
+              class="w-8 h-8 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6">
+      <div class="container mx-auto max-w-4xl">
+        <h2 class="font-serif text-4xl md:text-5xl mb-12 text-center">About</h2>
+        <div class="flex flex-col md:flex-row gap-12 items-center">
+          <div class="md:w-2/3">
+            <p class="text-lg md:text-xl leading-relaxed">
+              I am an interdisciplinary artist living and working in the UK,
+              weaving curation, installation, and sound into multisensory
+              explorations. My art is rooted in the choreography of internal
+              behaviors—where repetition and randomness shape reflective
+              environments and sonic encounters. Each project invites immersion
+              in chance, memory, and self.
+            </p>
+          </div>
+          <div class="md:w-1/3 flex justify-center">
+            <div
+              class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg"
+            >
+              <img
+                src="https://via.placeholder.com/300"
+                alt="Bruce Nemeth portrait"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artist Statement Section -->
+    <section id="statement" class="py-20 px-6 bg-white">
+      <div class="container mx-auto max-w-4xl">
+        <h2 class="font-serif text-4xl md:text-5xl mb-12 text-center">
+          Artist Statement
+        </h2>
+        <blockquote
+          class="font-serif text-xl md:text-2xl italic leading-relaxed text-center px-6 py-8 border-l-4 border-[#666666]"
+        >
+          Repetition is a myth—each iteration carries the temporal signature of
+          its moment, contaminated by the weight of its own becoming. What
+          masquerades as return is actually departure; what appears cyclical
+          reveals itself as spiral. Time itself ensures that no gesture, no
+          sound, no form can truly repeat, for difference inhabits the very core
+          of what we mistake for sameness.
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-6">
+      <div class="container mx-auto max-w-6xl">
+        <h2 class="font-serif text-4xl md:text-5xl mb-12 text-center">
+          Portfolio
+        </h2>
+
+        <!-- Portfolio items will be dynamically inserted here -->
+        <div id="portfolio-container"></div>
+
+        <!-- YouTube Video Section -->
+        <div class="mt-20">
+          <h3 class="font-serif text-3xl mb-8 text-center">Video Works</h3>
+          <div class="aspect-w-16 aspect-h-9 max-w-4xl mx-auto">
+            <div class="relative pb-[56.25%] h-0 overflow-hidden">
+              <iframe
+                src="https://www.youtube.com/watch?v=kR73ZEk26LU"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="absolute top-0 left-0 w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-white">
+      <div class="container mx-auto max-w-4xl">
+        <h2 class="font-serif text-4xl md:text-5xl mb-12 text-center">
+          Contact
+        </h2>
+        <div class="flex flex-col md:flex-row gap-12">
+          <div class="md:w-1/2">
+            <h3 class="font-serif text-2xl mb-6">Get in Touch</h3>
+            <p class="mb-6">
+              For inquiries, collaborations, or to learn more about my work,
+              please reach out:
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-center">
+                <svg
+                  class="w-6 h-6 mr-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
+                </svg>
+                <a
+                  href="mailto:bruce@example.com"
+                  class="hover:text-[#666666] transition-colors"
+                  >bruce@example.com</a
+                >
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-6 h-6 mr-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  ></path>
+                </svg>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[#666666] transition-colors"
+                  >@brucenemeth</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="md:w-1/2">
+            <h3 class="font-serif text-2xl mb-6">Send a Message</h3>
+            <form id="contact-form" class="space-y-4">
+              <div>
+                <label for="name" class="block mb-1">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-2 border border-[#E5E5E5] focus:outline-none focus:ring-1 focus:ring-[#666666]"
+                />
+              </div>
+              <div>
+                <label for="email" class="block mb-1">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2 border border-[#E5E5E5] focus:outline-none focus:ring-1 focus:ring-[#666666]"
+                />
+              </div>
+              <div>
+                <label for="message" class="block mb-1">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  class="w-full px-4 py-2 border border-[#E5E5E5] focus:outline-none focus:ring-1 focus:ring-[#666666]"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="px-6 py-2 bg-[#1A1A1A] text-white hover:bg-[#666666] transition-colors"
+              >
+                Send
+              </button>
+            </form>
+            <div id="form-message" class="mt-4 hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-[#1A1A1A] text-white text-center">
+      <p>
+        &copy; <span id="current-year"></span> Bruce Nemeth. All rights
+        reserved.
+      </p>
+    </footer>
+
+    <!-- PhotoSwipe -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="pswp__bg"></div>
+      <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+          <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+          <div class="pswp__top-bar">
+            <div class="pswp__counter"></div>
+            <button
+              class="pswp__button pswp__button--close"
+              title="Close (Esc)"
+            ></button>
+            <button
+              class="pswp__button pswp__button--share"
+              title="Share"
+            ></button>
+            <button
+              class="pswp__button pswp__button--fs"
+              title="Toggle fullscreen"
+            ></button>
+            <button
+              class="pswp__button pswp__button--zoom"
+              title="Zoom in/out"
+            ></button>
+            <div class="pswp__preloader">
+              <div class="pswp__preloader__icn">
+                <div class="pswp__preloader__cut">
+                  <div class="pswp__preloader__donut"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"
+          >
+            <div class="pswp__share-tooltip"></div>
+          </div>
+          <button
+            class="pswp__button pswp__button--arrow--left"
+            title="Previous (arrow left)"
+          ></button>
+          <button
+            class="pswp__button pswp__button--arrow--right"
+            title="Next (arrow right)"
+          ></button>
+          <div class="pswp__caption">
+            <div class="pswp__caption__center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/umd/photoswipe.umd.min.js"
+      integrity="sha512-BXwwGU7zCXVgpT2jpXnTbioT9q1Byf7NEXVxovTZPlNvelL2I/4LjOaoiB2a19L+g5za8RbkoJFH4fMPQcjFFw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="js/main.js"></script>
+    <script src="js/lightbox.js"></script>
+  </body>
+</html>
