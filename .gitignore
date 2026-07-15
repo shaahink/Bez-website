@@ -1,1 +1,16 @@
+# Working spec (kept out of the repo)
 /prompt.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Dependencies / build (if added later)
+node_modules/
+dist/
+build/
