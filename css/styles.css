@@ -364,7 +364,7 @@ h1, h2, h3, h4, blockquote {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 22%;
+  object-position: 50% 44%; /* lifted toward the face, off the top of the head */
   filter: grayscale(1) contrast(1.06) brightness(0.92);
   will-change: transform;
 }
@@ -987,6 +987,15 @@ h1, h2, h3, h4, blockquote {
 .footer__name span { color: var(--ember); }
 .footer__meta { text-align: right; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .footer__meta a:hover { color: var(--bone); }
+.footer__credit {
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: rgba(139, 133, 123, 0.6);
+}
+.footer__credit a { color: rgba(139, 133, 123, 0.85); }
+.footer__credit a:hover { color: var(--ember); }
 .footer__glyph {
   font-family: var(--arab);
   font-size: 1.4rem;

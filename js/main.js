@@ -282,7 +282,7 @@ function initContactForm() {
     if (action.includes("YOUR_FORM_ID")) {
       showFormMessage(
         message,
-        "The contact form isn't connected yet — please email me directly at shahin.kiassat90@gmail.com.",
+        "The contact form isn't connected yet — please email me directly at Brucenemeth@outlook.com.",
         ""
       );
       return;
