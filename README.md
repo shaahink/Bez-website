@@ -1,11 +1,17 @@
 # Bruce Nemeth — Artist Portfolio
 
 A single-page scrolling portfolio for interdisciplinary artist **Bruce Nemeth**.
-Minimal gallery aesthetic, built with plain HTML, CSS, and JavaScript — no build
-step required.
+Design concept: *"The Listening Room"* — a darkened-gallery aesthetic (obsidian
+ground, bone text, one ember accent drawn from the works, film grain) that
+carries the artist's idea of repetition-as-spiral through echoing type, a
+repeating marquee, exhibition numbering, and Persian glyph watermarks
+(تکرار / فراموشی / بی‌کلام). Built with plain HTML, hand-authored CSS, and
+vanilla JavaScript — **no build step, no CSS-framework runtime**.
 
-- **Tailwind CSS** (Play CDN) for utility styling
+- **Hand-authored CSS design system** (`css/styles.css`) — tokens, fluid type,
+  scroll reveals; keeps delivery light (~13KB gzipped vs. the old Tailwind CDN).
 - **PhotoSwipe 5** for the fullscreen image lightbox
+- **YouTube facade** — the video iframe only loads on click, for a fast first paint
 - **Formspree** for contact-form submissions
 - Hosted on **Vercel** (auto-deploys from GitHub)
 
@@ -35,11 +41,11 @@ npx serve .
 
 ```
 .
-├── index.html          # Page markup + meta tags + Tailwind config
+├── index.html          # Page markup + meta tags + font links
 ├── css/
-│   └── styles.css       # Custom styles (components, gallery, motion)
+│   └── styles.css       # Full design system (tokens, sections, gallery, motion)
 ├── js/
-│   ├── main.js          # Portfolio data, menu, form, animations
+│   ├── main.js          # Portfolio data, nav, form, reveals, video facade
 │   └── lightbox.js      # PhotoSwipe lightbox
 ├── images/
 │   ├── bruce-main.JPG    # Hero / portrait photo

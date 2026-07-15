@@ -8,10 +8,10 @@
     <!-- SEO -->
     <meta
       name="description"
-      content="Bruce Nemeth is an interdisciplinary artist living and working in the UK, weaving curation, installation, and sound into multisensory explorations of repetition, memory, and self."
+      content="Bruce Nemeth is an interdisciplinary artist living and working in the UK — curation, installation, and sound woven into multisensory explorations of repetition, memory, and self."
     />
     <meta name="author" content="Bruce Nemeth" />
-    <meta name="theme-color" content="#F5F5F5" />
+    <meta name="theme-color" content="#0a0a0b" />
     <link rel="canonical" href="/" />
 
     <!-- Open Graph / social sharing -->
@@ -30,41 +30,27 @@
     />
     <meta name="twitter:image" content="images/bruce-main.JPG" />
 
+    <!-- Enable progressive-enhancement styles (scroll reveals) before first paint. -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-    <!-- Tailwind CSS (Play CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Map Tailwind's font + color utilities to the brand system so
-      // `font-serif`, `font-sans`, `text-ink`, etc. are correct everywhere.
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ["Cormorant Garamond", "Georgia", "serif"],
-              sans: ["Inter", "system-ui", "sans-serif"],
-            },
-            colors: {
-              paper: "#F5F5F5",
-              ink: "#1A1A1A",
-              muted: "#666666",
-              line: "#E5E5E5",
-            },
-          },
-        },
-      };
-    </script>
+    <!-- Preload the hero image for a fast first paint -->
+    <link rel="preload" as="image" href="images/bruce-main.JPG" fetchpriority="high" />
 
-    <!-- Google Fonts -->
+    <!-- Fonts: one request, only the weights used. Amiri (Arabic subset only)
+         renders the Persian glyphs; Cormorant is the display serif; Inter the UI. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Amiri:wght@400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
-    <!-- PhotoSwipe CSS -->
+    <!-- PhotoSwipe (lightbox) CSS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.4.4/photoswipe.min.css"
@@ -73,250 +59,252 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- Custom CSS -->
+    <!-- Design system -->
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="bg-paper text-ink font-sans antialiased">
-    <!-- Skip link for keyboard / screen-reader users -->
-    <a href="#about" class="skip-link">Skip to content</a>
 
-    <!-- Navigation -->
-    <nav
-      class="fixed top-0 w-full bg-paper/90 backdrop-blur-sm z-50 border-b border-line"
-      aria-label="Primary"
-    >
-      <div class="container mx-auto px-6 py-4">
-        <div class="flex justify-between items-center">
-          <a href="#hero" class="font-serif text-xl tracking-wide">Bruce Nemeth</a>
-          <div class="hidden md:flex space-x-8">
-            <a href="#about" class="nav-link" data-nav>About</a>
-            <a href="#statement" class="nav-link" data-nav>Statement</a>
-            <a href="#portfolio" class="nav-link" data-nav>Portfolio</a>
-            <a href="#contact" class="nav-link" data-nav>Contact</a>
-          </div>
-          <button
-            id="mobile-menu-button"
-            class="md:hidden p-1"
-            aria-label="Open menu"
-            aria-controls="mobile-menu"
-            aria-expanded="false"
-          >
-            <svg
-              class="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-        </div>
+  <body>
+    <a href="#statement" class="skip-link">Skip to content</a>
+
+    <!-- ================= Navigation ================= -->
+    <header class="nav" id="nav" aria-label="Primary">
+      <div class="shell nav__inner">
+        <a href="#hero" class="nav__brand">Bruce&nbsp;<b>Nemeth</b></a>
+
+        <nav class="nav__links">
+          <a href="#statement" class="nav__link" data-nav>Concept</a>
+          <a href="#about" class="nav__link" data-nav>About</a>
+          <a href="#works" class="nav__link" data-nav>Works</a>
+          <a href="#contact" class="nav__link" data-nav>Contact</a>
+        </nav>
+
+        <button
+          class="nav__toggle"
+          id="nav-toggle"
+          aria-label="Open menu"
+          aria-controls="nav-mobile"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <!-- Mobile menu -->
-      <div id="mobile-menu" class="hidden md:hidden bg-paper border-t border-line">
-        <div class="container mx-auto px-6 py-4 flex flex-col space-y-3">
-          <a href="#about" class="nav-link">About</a>
-          <a href="#statement" class="nav-link">Statement</a>
-          <a href="#portfolio" class="nav-link">Portfolio</a>
-          <a href="#contact" class="nav-link">Contact</a>
-        </div>
+
+      <div class="nav__mobile" id="nav-mobile">
+        <ul>
+          <li><a href="#statement">Concept</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#works">Works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-    </nav>
+    </header>
 
     <main>
-      <!-- Hero Section -->
-      <section id="hero" class="min-h-screen flex items-center justify-center relative">
-        <div class="absolute inset-0 overflow-hidden">
+      <!-- ================= Hero ================= -->
+      <section class="hero" id="hero">
+        <div class="hero__media">
           <img
             src="images/bruce-main.JPG"
-            alt="Bruce Nemeth"
-            class="w-full h-full object-cover"
-            fetchpriority="high"
+            alt="Bruce Nemeth, in headphones, listening — a portrait in shadow"
             width="1600"
             height="2400"
+            fetchpriority="high"
+            data-parallax
           />
-          <!-- Legibility gradient -->
-          <div
-            class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"
-          ></div>
         </div>
-        <div class="relative z-10 text-center text-white px-6">
-          <p class="uppercase tracking-[0.35em] text-xs md:text-sm mb-6 text-white/80">
-            Curation · Installation · Sound
-          </p>
-          <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold mb-4 leading-none">
-            Bruce Nemeth
+        <div class="hero__scrim" aria-hidden="true"></div>
+        <span class="hero__glyph" lang="fa" dir="rtl" aria-hidden="true">تکرار</span>
+
+        <div class="shell hero__inner">
+          <p class="eyebrow">Curation · Installation · Sound</p>
+          <h1 class="hero__name">
+            <span>Bruce</span>
+            <span class="thin">Nemeth</span>
           </h1>
-          <p class="font-serif italic text-xl md:text-2xl max-w-2xl mx-auto text-white/90">
-            Interdisciplinary Artist
+          <p class="hero__tagline">
+            An interdisciplinary artist listening for the difference inside
+            everything that seems to repeat.
           </p>
-          <div class="mt-12 animate-bounce">
-            <a href="#about" class="inline-block" aria-label="Scroll to content">
-              <svg
-                class="w-8 h-8 mx-auto"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                ></path>
-              </svg>
+          <div class="hero__foot">
+            <a href="#statement" class="scroll-cue">
+              <i aria-hidden="true"></i> Enter
             </a>
+            <span class="eq" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </span>
           </div>
         </div>
       </section>
 
-      <!-- About Section -->
-      <section id="about" class="py-24 px-6 fade-in">
-        <div class="container mx-auto max-w-4xl">
-          <h2 class="section-heading">About</h2>
-          <div class="flex flex-col md:flex-row gap-12 items-center">
-            <div class="md:w-2/3 order-2 md:order-1">
-              <p class="text-lg md:text-xl leading-relaxed text-ink/90">
-                I am an interdisciplinary artist living and working in the UK,
-                weaving curation, installation, and sound into multisensory
-                explorations. My art is rooted in the choreography of internal
-                behaviors—where repetition and randomness shape reflective
-                environments and sonic encounters. Each project invites immersion
-                in chance, memory, and self.
-              </p>
-            </div>
-            <div class="md:w-1/3 flex justify-center order-1 md:order-2">
-              <div
-                class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg"
-              >
-                <img
-                  src="images/bruce-main.JPG"
-                  alt="Portrait of Bruce Nemeth"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                  width="1600"
-                  height="2400"
-                />
-              </div>
-            </div>
+      <!-- ================= Marquee ================= -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Repetition is a myth</span><span class="dot">✳</span>
+          <span><b>تکرار</b></span><span class="dot">✳</span>
+          <span>Difference inhabits sameness</span><span class="dot">✳</span>
+          <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
+          <!-- duplicated for a seamless loop -->
+          <span>Repetition is a myth</span><span class="dot">✳</span>
+          <span><b>تکرار</b></span><span class="dot">✳</span>
+          <span>Difference inhabits sameness</span><span class="dot">✳</span>
+          <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
+        </div>
+      </div>
+
+      <!-- ================= Statement / concept ================= -->
+      <section class="statement" id="statement">
+        <div class="echoes" aria-hidden="true">
+          <span>repetition</span>
+          <span>repetition</span>
+          <span>repetition</span>
+          <span>repetition</span>
+          <span>repetition</span>
+        </div>
+
+        <div class="shell">
+          <div class="statement__inner reveal">
+            <p class="eyebrow statement__kicker eyebrow--plain">Artist Statement</p>
+            <p class="statement__lead">
+              Repetition is a myth — each iteration carries the temporal
+              signature of its moment.
+            </p>
+            <p class="statement__body">
+              What masquerades as return is actually <b>departure</b>; what
+              appears cyclical reveals itself as <b>spiral</b>. Time itself
+              ensures that no gesture, no sound, no form can truly repeat, for
+              difference inhabits the very core of what we mistake for sameness.
+            </p>
+            <p class="statement__sig">Bruce Nemeth</p>
           </div>
         </div>
       </section>
 
-      <!-- Artist Statement Section -->
-      <section id="statement" class="py-24 px-6 bg-white fade-in">
-        <div class="container mx-auto max-w-4xl">
-          <h2 class="section-heading">Artist Statement</h2>
-          <blockquote class="statement-quote">
-            Repetition is a myth—each iteration carries the temporal signature of
-            its moment, contaminated by the weight of its own becoming. What
-            masquerades as return is actually departure; what appears cyclical
-            reveals itself as spiral. Time itself ensures that no gesture, no
-            sound, no form can truly repeat, for difference inhabits the very core
-            of what we mistake for sameness.
-          </blockquote>
-        </div>
-      </section>
-
-      <!-- Portfolio Section -->
-      <section id="portfolio" class="py-24 px-6 fade-in">
-        <div class="container mx-auto max-w-6xl">
-          <h2 class="section-heading">Portfolio</h2>
-
-          <!-- Portfolio projects are rendered from the data in js/main.js -->
-          <div id="portfolio-container"></div>
-
-          <!-- Video Works -->
-          <div class="mt-24">
-            <h3 class="font-serif text-3xl mb-8 text-center">Video Works</h3>
-            <div class="relative pb-[56.25%] h-0 overflow-hidden max-w-4xl mx-auto rounded-sm shadow-md">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/kR73ZEk26LU"
-                title="Bruce Nemeth — video work"
-                frameborder="0"
+      <!-- ================= About ================= -->
+      <section class="about" id="about">
+        <div class="shell">
+          <p class="eyebrow reveal">About the artist</p>
+          <div class="about__grid" style="margin-top: 2.5rem">
+            <figure class="about__portrait reveal">
+              <img
+                src="images/bruce-main.JPG"
+                alt="Portrait of Bruce Nemeth"
+                width="1600"
+                height="2400"
                 loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                class="absolute top-0 left-0 w-full h-full"
-              ></iframe>
+                decoding="async"
+              />
+              <figcaption>In the studio</figcaption>
+            </figure>
+
+            <div class="about__body reveal" style="--i: 1">
+              <p class="about__lead">
+                <span class="drop">I</span> am an interdisciplinary artist
+                living and working in the UK, weaving curation, installation, and
+                sound into multisensory explorations.
+              </p>
+              <p class="about__text">
+                My art is rooted in the choreography of internal behaviours —
+                where repetition and randomness shape reflective environments and
+                sonic encounters. Each project invites immersion in chance,
+                memory, and self: an attention paid to the small departures that
+                live inside every act of returning.
+              </p>
+              <ul class="about__meta">
+                <li>Sound</li>
+                <li>Installation</li>
+                <li>Curation</li>
+                <li>United Kingdom</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Contact Section -->
-      <section id="contact" class="py-24 px-6 bg-white fade-in">
-        <div class="container mx-auto max-w-4xl">
-          <h2 class="section-heading">Contact</h2>
-          <div class="flex flex-col md:flex-row gap-12">
-            <div class="md:w-1/2">
-              <h3 class="font-serif text-2xl mb-6">Get in Touch</h3>
-              <p class="mb-6 text-ink/80">
-                For inquiries, collaborations, or to learn more about my work,
-                please reach out:
+      <!-- ================= Works ================= -->
+      <section class="works" id="works">
+        <div class="shell">
+          <div class="works__head">
+            <div class="reveal">
+              <p class="eyebrow">Selected Works</p>
+              <h2 class="section-title" style="margin-top: 1rem">
+                Gestures that <em>refuse</em> to repeat
+              </h2>
+            </div>
+            <p class="works__count reveal" style="--i: 1">Two projects · Moving image</p>
+          </div>
+
+          <!-- Chapters render here from js/main.js -->
+          <div id="works-container"></div>
+        </div>
+      </section>
+
+      <!-- ================= Moving image (video) ================= -->
+      <section class="film" id="film">
+        <div class="shell">
+          <div class="film__head reveal">
+            <p class="eyebrow">Moving Image</p>
+            <h2 class="section-title" style="margin-top: 1rem">On screen, in time</h2>
+          </div>
+
+          <div class="film__frame reveal" style="--i: 1">
+            <!-- Facade: the YouTube iframe is only loaded on click (faster page). -->
+            <button
+              class="film__facade"
+              id="video-facade"
+              type="button"
+              data-video-id="kR73ZEk26LU"
+              aria-label="Play video work by Bruce Nemeth"
+            >
+              <img
+                src="https://i.ytimg.com/vi/kR73ZEk26LU/hqdefault.jpg"
+                alt=""
+                width="480"
+                height="360"
+                loading="lazy"
+              />
+              <span class="film__play"><span></span></span>
+              <span class="film__label">Play — video work</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Contact ================= -->
+      <section class="contact" id="contact">
+        <div class="shell">
+          <div class="contact__grid">
+            <div class="reveal">
+              <p class="eyebrow">Contact</p>
+              <h2 class="contact__title">Let's begin<br />a conversation.</h2>
+              <p class="contact__text">
+                For inquiries, collaborations, or to learn more about the work,
+                please reach out.
               </p>
-              <ul class="space-y-4">
-                <li class="flex items-center">
-                  <svg
-                    class="w-6 h-6 mr-3 text-muted"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    ></path>
-                  </svg>
-                  <!-- EDIT: update the contact email here (and the mailto: below). -->
-                  <a
-                    href="mailto:shahin.kiassat90@gmail.com"
-                    class="hover:text-muted transition-colors"
-                    >shahin.kiassat90@gmail.com</a
-                  >
+              <ul class="contact__links">
+                <li>
+                  <!-- EDIT: update the contact email here (and the mailto:). -->
+                  <a href="mailto:shahin.kiassat90@gmail.com">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    shahin.kiassat90@gmail.com
+                  </a>
                 </li>
-                <li class="flex items-center">
-                  <svg
-                    class="w-6 h-6 mr-3 text-muted"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                    ></path>
-                  </svg>
+                <li>
                   <!-- EDIT: replace with the real Instagram handle + URL. -->
-                  <a
-                    href="https://instagram.com/brucenemeth"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="hover:text-muted transition-colors"
-                    >@brucenemeth</a
-                  >
+                  <a href="https://instagram.com/brucenemeth" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+                    </svg>
+                    @brucenemeth
+                  </a>
                 </li>
               </ul>
             </div>
-            <div class="md:w-1/2">
-              <h3 class="font-serif text-2xl mb-6">Send a Message</h3>
+
+            <div class="reveal" style="--i: 1">
               <!--
                 EDIT: paste your Formspree form ID into the action below.
                 Get one free at https://formspree.io (New Form → copy the endpoint).
@@ -324,69 +312,44 @@
               -->
               <form
                 id="contact-form"
+                class="form"
                 action="https://formspree.io/f/YOUR_FORM_ID"
                 method="POST"
-                class="space-y-4"
                 novalidate
               >
-                <div>
-                  <label for="name" class="block mb-1 text-sm">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    autocomplete="name"
-                    required
-                    class="form-field"
-                  />
+                <div class="form__field">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required />
                 </div>
-                <div>
-                  <label for="email" class="block mb-1 text-sm">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    autocomplete="email"
-                    required
-                    class="form-field"
-                  />
+                <div class="form__field">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required />
                 </div>
-                <div>
-                  <label for="message" class="block mb-1 text-sm">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="4"
-                    required
-                    class="form-field"
-                  ></textarea>
+                <div class="form__field">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
                 </div>
                 <!-- Honeypot: bots fill this, humans don't. -->
-                <input
-                  type="text"
-                  name="_gotcha"
-                  tabindex="-1"
-                  autocomplete="off"
-                  class="hidden"
-                  aria-hidden="true"
-                />
-                <button type="submit" id="contact-submit" class="btn-primary">
-                  Send
-                </button>
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+                <button type="submit" id="contact-submit" class="btn">Send message →</button>
               </form>
-              <div id="form-message" class="mt-4 hidden" role="status" aria-live="polite"></div>
+              <div id="form-message" class="form__status" hidden role="status" aria-live="polite"></div>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="py-10 px-6 bg-ink text-white text-center">
-      <p class="font-serif text-lg mb-2">Bruce Nemeth</p>
-      <p class="text-sm text-white/60">
-        &copy; <span id="current-year"></span> Bruce Nemeth. All rights reserved.
-      </p>
+    <!-- ================= Footer ================= -->
+    <footer class="footer">
+      <div class="shell footer__inner">
+        <p class="footer__name">Bruce&nbsp;<span>Nemeth</span></p>
+        <div class="footer__meta">
+          <span class="footer__glyph" lang="fa" dir="rtl">تکرار</span>
+          &copy; <span id="current-year"></span> Bruce Nemeth ·
+          <a href="#hero">Back to top ↑</a>
+        </div>
+      </div>
     </footer>
 
     <!-- Scripts -->
@@ -395,8 +358,9 @@
       integrity="sha512-BXwwGU7zCXVgpT2jpXnTbioT9q1Byf7NEXVxovTZPlNvelL2I/4LjOaoiB2a19L+g5za8RbkoJFH4fMPQcjFFw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+      defer
     ></script>
-    <script src="js/main.js"></script>
-    <script src="js/lightbox.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/lightbox.js" defer></script>
   </body>
 </html>
