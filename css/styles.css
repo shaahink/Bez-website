@@ -691,11 +691,13 @@ h1, h2, h3, h4, blockquote {
   font-weight: 500;
 }
 .about__text { color: var(--bone-dim); max-width: var(--measure); }
+/* padding, not padding-top: a <ul> carries 40px of UA padding-inline-start,
+   which was indenting the whole list past the text above it. */
 .about__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem 0 0;
   border-top: 1px solid var(--line);
   list-style: none;
 }
@@ -705,9 +707,11 @@ h1, h2, h3, h4, blockquote {
   text-transform: uppercase;
   color: var(--muted);
 }
-.about__meta li + li::before {
+/* The separator trails its own item. Leading it (li + li::before) meant a
+   wrapped line opened with a stray dot, which read as a broken bullet list. */
+.about__meta li:not(:last-child)::after {
   content: "·";
-  margin-right: 1rem;
+  margin-left: 1rem;
   color: var(--ember);
 }
 
@@ -1215,7 +1219,9 @@ h1, h2, h3, h4, blockquote {
   text-wrap: balance;
 }
 .contact__text { color: var(--bone-dim); max-width: 44ch; margin-bottom: 2rem; }
-.contact__links { list-style: none; display: grid; gap: 1rem; }
+/* padding: 0 — the UA's 40px padding-inline-start would otherwise throw the
+   centred (.contact__solo) variant off-centre by half of it. */
+.contact__links { list-style: none; display: grid; gap: 1rem; padding: 0; }
 .contact__links a {
   display: inline-flex;
   align-items: center;
