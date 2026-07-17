@@ -2,14 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
-      "//": "Images are addressed by a stable name and effectively never change in place; a day of hard caching with a long stale-while-revalidate keeps them instant while still letting a swapped photograph propagate.",
       "source": "/images/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=2592000" }
       ]
     },
     {
-      "//": "The CSS and JS are served from unversioned paths (/css/styles.css), so a long max-age has no way to be invalidated: a returning visitor keeps the old stylesheet against the new HTML — which renders the site badly — until it expires. Revalidate every load; the answer is a 304 on a connection that is already open for the HTML.",
       "source": "/css/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
