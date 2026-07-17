@@ -1,6 +1,9 @@
 # Working spec (kept out of the repo)
 /prompt.md
 
+# Raw source material (CV PDFs + full-res photos, ~150MB — optimized copies live in /images)
+/new content/
+
 # OS files
 .DS_Store
 Thumbs.db

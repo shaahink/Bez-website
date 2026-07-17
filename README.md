@@ -1,19 +1,27 @@
 # Bruce Nemeth — Artist Portfolio
 
-A single-page scrolling portfolio for interdisciplinary artist **Bruce Nemeth**.
-Design concept: *"The Listening Room"* — a darkened-gallery aesthetic (obsidian
-ground, bone text, one ember accent drawn from the works, film grain) that
-carries the artist's idea of repetition-as-spiral through echoing type, a
-repeating marquee, exhibition numbering, and Persian glyph watermarks
-(تکرار / فراموشی / بی‌کلام). Built with plain HTML, hand-authored CSS, and
-vanilla JavaScript — **no build step, no CSS-framework runtime**.
+A three-page portfolio for interdisciplinary artist **Bruce Nemeth**: the home
+page, a consolidated biography (`about.html`), and a calligraphy gallery
+(`showcase.html`). Design concept: *"The Listening Room"* — a darkened-gallery
+aesthetic (obsidian ground, bone text, one ember accent drawn from the works,
+film grain) softened by a slow Eno-style color wash, carrying the artist's idea
+of repetition-as-spiral through echoing type, a repeating marquee, exhibition
+numbering, and Persian glyph watermarks (تکرار / فراموشی / بی‌کلام / مشق). Built
+with plain HTML, hand-authored CSS, and vanilla JavaScript — **no build step,
+no CSS-framework runtime**.
 
 - **Hand-authored CSS design system** (`css/styles.css`) — tokens, fluid type,
-  scroll reveals; keeps delivery light (~13KB gzipped vs. the old Tailwind CDN).
+  scroll reveals; keeps delivery light.
+- **Hero slideshow with a noise dissolve** (`js/hero.js`) — the works surface
+  through swelling grain; no controls, by design. Falls back to a crossfade.
 - **PhotoSwipe 5** for the fullscreen image lightbox
 - **YouTube facade** — the video iframe only loads on click, for a fast first paint
-- **Formspree** for contact-form submissions
+- **Contact is email-only** (owner request) — no form, no socials
 - Hosted on **Vercel** (auto-deploys from GitHub)
+
+> **Editors: read `content-map.md` first.** It records the wording rules the
+> artist asked for (partners, sound, interdisciplinary), who the partners are,
+> the verified project facts, and where every image came from.
 
 ---
 
@@ -41,14 +49,22 @@ npx serve .
 
 ```
 .
-├── index.html          # Page markup + meta tags + font links
+├── index.html           # Home: hero slideshow, works, partners, contact
+├── showcase.html        # The calligraphy gallery (three "rooms")
+├── about.html           # Consolidated biography / CV
+├── content-map.md       # Source of truth: people, wording rules, facts, assets
 ├── css/
 │   └── styles.css       # Full design system (tokens, sections, gallery, motion)
 ├── js/
-│   ├── main.js          # Portfolio data, nav, form, reveals, video facade
+│   ├── main.js          # Portfolio data, nav, reveals, video facade
+│   ├── hero.js          # Hero slideshow + noise dissolve
 │   └── lightbox.js      # PhotoSwipe lightbox
 ├── images/
-│   ├── bruce-main.JPG    # Hero / portrait photo
+│   ├── bruce-main.JPG    # Portrait (home about section)
+│   ├── bruce-listening.jpg # Portrait (about page)
+│   ├── hero/             # Hero slideshow frames
+│   ├── showcase/         # Showcase gallery images (canvas-/insitu-/paper-*)
+│   ├── partners/         # Partner portraits
 │   ├── forgotten/        # "Forgotten" project photos
 │   └── wordless/         # "Wordless" project photos
 ├── favicon.svg
@@ -61,24 +77,14 @@ npx serve .
 ## Common edits
 
 ### Update contact email
-In `index.html`, search for `shahin.kiassat90@gmail.com` (it appears twice — the
-link text and the `mailto:`) and replace both with the real address. Also update
-it in the fallback message inside `js/main.js`.
+The address `Brucenemeth@outlook.com` appears in the contact section and footer
+of all three pages — search and replace across `index.html`, `showcase.html`,
+and `about.html`. (Contact is deliberately email-only: no form, no socials.)
 
-### Update the Instagram / social link
-In `index.html`, find the comment `EDIT: replace with the real Instagram handle`
-and update the `href` and the visible `@handle`.
-
-### Connect the contact form (Formspree)
-The form is wired up but needs your endpoint:
-
-1. Create a free form at <https://formspree.io> and copy its endpoint
-   (looks like `https://formspree.io/f/abcdwxyz`).
-2. In `index.html`, replace `https://formspree.io/f/YOUR_FORM_ID` in the
-   `<form action="...">` with your endpoint.
-
-Until that's done, the form shows a friendly "email me directly" message instead
-of failing.
+### Change the hero slideshow
+The frames are the `<img>` tags inside `#hero-slides` in `index.html` (first one
+eager with `src`, the rest lazy with `data-src`). Timing lives at the top of
+`js/hero.js` (`FADE`, `HOLD`).
 
 ### Add or edit a portfolio project
 Everything lives in the `portfolioItems` array at the top of `js/main.js`. Copy a

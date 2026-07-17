@@ -17,6 +17,18 @@ document.addEventListener("click", (e) => {
   openLightbox(gallery, cells.indexOf(cell));
 });
 
+/* Keyboard access for cells authored directly in HTML (the showcase walls).
+   main.js already binds keydown on the cells it builds and calls
+   preventDefault() there, so those are skipped here. */
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter" && e.key !== " ") return;
+  if (e.defaultPrevented) return;
+  const cell = e.target.closest && e.target.closest(".gallery-item");
+  if (!cell || !cell.closest(".gallery")) return;
+  e.preventDefault();
+  cell.click();
+});
+
 function openLightbox(gallery, index) {
   if (typeof PhotoSwipe === "undefined") return; // library not loaded
 

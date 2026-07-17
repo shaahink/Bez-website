@@ -1,7 +1,7 @@
 /* ===========================================================================
    Bruce Nemeth — behaviour
    Sections: Data · Works render · Nav · Reveal · Scrollspy · Parallax ·
-             Video facade · Contact form · Init
+             Video facade · Init
    =========================================================================== */
 
 /* ---------- Portfolio data -------------------------------------------------
@@ -263,66 +263,6 @@ function initVideoFacade() {
   });
 }
 
-/* ---------- Contact form (Formspree) --------------------------------------- */
-function showFormMessage(el, text, type) {
-  el.textContent = text;
-  el.className = "form__status" + (type ? ` is-${type}` : "");
-  el.hidden = false;
-}
-
-function initContactForm() {
-  const form = document.getElementById("contact-form");
-  const message = document.getElementById("form-message");
-  if (!form || !message) return;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const action = form.getAttribute("action") || "";
-
-    if (action.includes("YOUR_FORM_ID")) {
-      showFormMessage(
-        message,
-        "The contact form isn't connected yet — please email me directly at Brucenemeth@outlook.com.",
-        ""
-      );
-      return;
-    }
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const btn = document.getElementById("contact-submit");
-    const label = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = "Sending…";
-
-    try {
-      const res = await fetch(action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        showFormMessage(message, "Thank you — your message is on its way. I'll be in touch soon.", "ok");
-        form.reset();
-      } else {
-        const data = await res.json().catch(() => ({}));
-        const msg =
-          data.errors && data.errors.length
-            ? data.errors.map((er) => er.message).join(", ")
-            : "Something went wrong. Please try again, or email me directly.";
-        showFormMessage(message, msg, "err");
-      }
-    } catch (err) {
-      showFormMessage(message, "Network error. Please try again, or email me directly.", "err");
-    } finally {
-      btn.disabled = false;
-      btn.textContent = label;
-    }
-  });
-}
-
 /* ---------- Init ----------------------------------------------------------- */
 function init() {
   const yearEl = document.getElementById("current-year");
@@ -334,7 +274,6 @@ function init() {
   initScrollSpy();
   initParallax();
   initVideoFacade();
-  initContactForm();
 }
 
 if (document.readyState === "loading") {

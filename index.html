@@ -8,7 +8,7 @@
     <!-- SEO -->
     <meta
       name="description"
-      content="Bruce Nemeth is an interdisciplinary artist living and working in the UK — curation, installation, and sound woven into multisensory explorations of repetition, memory, and self."
+      content="Bruce Nemeth is an interdisciplinary artist living and working in the UK — curation, installation, and sound woven into cross-disciplinary, multisensory explorations of repetition, memory, and self."
     />
     <meta name="author" content="Bruce Nemeth" />
     <meta name="theme-color" content="#0a0a0b" />
@@ -21,14 +21,14 @@
       property="og:description"
       content="Curation, installation, and sound — multisensory explorations of repetition, memory, and self."
     />
-    <meta property="og:image" content="images/bruce-main.JPG" />
+    <meta property="og:image" content="images/hero/hero-steps.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Bruce Nemeth — Interdisciplinary Artist" />
     <meta
       name="twitter:description"
       content="Curation, installation, and sound — multisensory explorations of repetition, memory, and self."
     />
-    <meta name="twitter:image" content="images/bruce-main.JPG" />
+    <meta name="twitter:image" content="images/hero/hero-steps.jpg" />
 
     <!-- Enable progressive-enhancement styles (scroll reveals) before first paint. -->
     <script>
@@ -38,8 +38,8 @@
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-    <!-- Preload the hero image for a fast first paint -->
-    <link rel="preload" as="image" href="images/bruce-main.JPG" fetchpriority="high" />
+    <!-- Preload the first hero frame for a fast first paint -->
+    <link rel="preload" as="image" href="images/hero/hero-steps.jpg" fetchpriority="high" />
 
     <!-- Fonts: one request, only the weights used. Amiri (Arabic subset only)
          renders the Persian glyphs; Cormorant is the display serif; Inter the UI. -->
@@ -72,9 +72,10 @@
         <a href="#hero" class="nav__brand">Bruce&nbsp;<b>Nemeth</b></a>
 
         <nav class="nav__links">
-          <a href="#statement" class="nav__link" data-nav>Concept</a>
-          <a href="#about" class="nav__link" data-nav>About</a>
           <a href="#works" class="nav__link" data-nav>Works</a>
+          <a href="#partners" class="nav__link" data-nav>Partners</a>
+          <a href="showcase.html" class="nav__link">Showcase</a>
+          <a href="about.html" class="nav__link">About</a>
           <a href="#contact" class="nav__link" data-nav>Contact</a>
         </nav>
 
@@ -91,9 +92,10 @@
 
       <div class="nav__mobile" id="nav-mobile">
         <ul>
-          <li><a href="#statement">Concept</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#works">Works</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="showcase.html">Showcase</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -102,16 +104,48 @@
     <main>
       <!-- ================= Hero ================= -->
       <section class="hero" id="hero">
-        <div class="hero__media">
+        <!-- Slideshow of the works: frames surface through a noise dissolve
+             (js/hero.js). No controls by design — it is a room, not a widget. -->
+        <div class="hero__media" id="hero-slides" data-slideshow data-parallax>
           <img
-            src="images/bruce-main.JPG"
-            alt="Bruce Nemeth, in headphones, listening — a portrait in shadow"
-            width="1600"
-            height="2400"
+            class="is-active"
+            src="images/hero/hero-steps.jpg"
+            alt="A black canvas with a single white gesture, resting on the ruined brick steps of an old house"
+            width="2200"
+            height="1467"
             fetchpriority="high"
-            data-parallax
           />
+          <img
+            data-src="images/hero/hero-red.jpg"
+            alt="Red brushstrokes sweeping down a dark canvas"
+            width="1467"
+            height="2200"
+            loading="lazy"
+          />
+          <img
+            data-src="images/hero/hero-niche.jpg"
+            alt="A calligraphic canvas set into a broken window niche, caught in hard sunlight"
+            width="1467"
+            height="2200"
+            loading="lazy"
+          />
+          <img
+            data-src="images/hero/hero-triptych.jpg"
+            alt="Three black-and-white calligraphic canvases hung in a row"
+            width="2200"
+            height="1467"
+            loading="lazy"
+          />
+          <img
+            data-src="images/hero/hero-crimson.jpg"
+            alt="Dense crimson calligraphy on black — a close detail"
+            width="1237"
+            height="2200"
+            loading="lazy"
+          />
+          <canvas class="hero__canvas" aria-hidden="true"></canvas>
         </div>
+        <div class="hero__wash" aria-hidden="true"></div>
         <div class="hero__scrim" aria-hidden="true"></div>
         <span class="hero__glyph" lang="fa" dir="rtl" aria-hidden="true">تکرار</span>
 
@@ -199,8 +233,9 @@
             <div class="about__body reveal" style="--i: 1">
               <p class="about__lead">
                 <span class="drop">I</span> am an interdisciplinary artist
-                living and working in the UK, weaving curation, installation, and
-                sound into multisensory explorations.
+                living and working in the UK — art director and curator, weaving
+                installation and sound into cross-disciplinary, multisensory
+                explorations.
               </p>
               <p class="about__text">
                 My art is rooted in the choreography of internal behaviours —
@@ -213,8 +248,10 @@
                 <li>Sound</li>
                 <li>Installation</li>
                 <li>Curation</li>
-                <li>United Kingdom</li>
+                <li>Art direction</li>
+                <li>London, UK</li>
               </ul>
+              <a href="about.html" class="btn">Full biography →</a>
             </div>
           </div>
         </div>
@@ -237,6 +274,26 @@
           <div id="works-container"></div>
         </div>
       </section>
+
+      <!-- ================= Showcase tease ================= -->
+      <a class="tease" href="showcase.html" aria-label="Enter the Showcase — the calligraphy gallery">
+        <div class="tease__bg">
+          <img
+            src="images/hero/hero-crimson.jpg"
+            alt=""
+            width="1237"
+            height="2200"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="tease__scrim" aria-hidden="true"></div>
+        <div class="shell tease__inner">
+          <p class="eyebrow">The Showcase</p>
+          <h2 class="tease__title">Ink, held to the light <span class="go">→</span></h2>
+          <p class="tease__hint">Canvases · In the open · Works on paper</p>
+        </div>
+      </a>
 
       <!-- ================= Moving image (video) ================= -->
       <section class="film" id="film">
@@ -269,71 +326,94 @@
         </div>
       </section>
 
+      <!-- ================= Partners ================= -->
+      <section class="partners" id="partners">
+        <div class="shell">
+          <p class="eyebrow reveal">Partners</p>
+          <p class="partners__intro reveal" style="--i: 1">
+            The practice is cross-disciplinary — and it keeps returning to the
+            same few hands.
+          </p>
+
+          <div class="partners__grid">
+            <div class="partner reveal">
+              <div class="partner__media">
+                <img
+                  src="images/partners/behnam.jpg"
+                  alt="Behnam, leaning against one of his ink-marked canvases"
+                  width="600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="partner__name">Behnam</p>
+              <p class="partner__role">Artist &amp; calligrapher</p>
+            </div>
+
+            <div class="partner reveal" style="--i: 1">
+              <div class="partner__media">
+                <img
+                  src="images/partners/shayan.jpg"
+                  alt="Shayan, in a half-lit studio portrait"
+                  width="600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="partner__name">Shayan</p>
+              <p class="partner__role">Videographer &amp; photographer</p>
+            </div>
+
+            <div class="partner reveal" style="--i: 2">
+              <div class="partner__media">
+                <img
+                  src="images/partners/behrooz.jpg"
+                  alt="Behrooz, standing before weathered rocks in the mist"
+                  width="900"
+                  height="629"
+                  loading="lazy"
+                  decoding="async"
+                  style="object-position: 50% 18%"
+                />
+              </div>
+              <p class="partner__name">Behrooz</p>
+              <p class="partner__role">Artist &amp; music composer</p>
+            </div>
+
+            <!-- S K prefers to stay behind the curtain — a note, held in braces. -->
+            <div class="partner partner--sk reveal" style="--i: 3">
+              <div class="partner__media" role="img" aria-label="No photograph — a musical note wrapped in code braces">
+                <span class="sk-glyph">{&hairsp;<span class="note">♪</span>&hairsp;}</span>
+              </div>
+              <p class="partner__name">S&nbsp;K</p>
+              <p class="partner__role">Programming</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ================= Contact ================= -->
       <section class="contact" id="contact">
         <div class="shell">
-          <div class="contact__grid">
-            <div class="reveal">
-              <p class="eyebrow">Contact</p>
-              <h2 class="contact__title">Let's begin<br />a conversation.</h2>
-              <p class="contact__text">
-                For inquiries, collaborations, or to learn more about the work,
-                please reach out.
-              </p>
-              <ul class="contact__links">
-                <li>
-                  <a href="mailto:Brucenemeth@outlook.com">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    Brucenemeth@outlook.com
-                  </a>
-                </li>
-                <li>
-                  <!-- EDIT: replace with the real Instagram handle + URL. -->
-                  <a href="https://instagram.com/brucenemeth" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                      <rect x="3" y="3" width="18" height="18" rx="5" />
-                      <circle cx="12" cy="12" r="4" />
-                      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
-                    </svg>
-                    @brucenemeth
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="reveal" style="--i: 1">
-              <!--
-                EDIT: paste your Formspree form ID into the action below.
-                Get one free at https://formspree.io (New Form → copy the endpoint).
-                Until then the form shows a friendly "not yet configured" note.
-              -->
-              <form
-                id="contact-form"
-                class="form"
-                action="https://formspree.io/f/YOUR_FORM_ID"
-                method="POST"
-                novalidate
-              >
-                <div class="form__field">
-                  <label for="name">Name</label>
-                  <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required />
-                </div>
-                <div class="form__field">
-                  <label for="email">Email</label>
-                  <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required />
-                </div>
-                <div class="form__field">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
-                </div>
-                <!-- Honeypot: bots fill this, humans don't. -->
-                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-                <button type="submit" id="contact-submit" class="btn">Send message →</button>
-              </form>
-              <div id="form-message" class="form__status" hidden role="status" aria-live="polite"></div>
-            </div>
+          <div class="contact__solo reveal">
+            <p class="eyebrow">Contact</p>
+            <h2 class="contact__title">Let's begin<br />a conversation.</h2>
+            <p class="contact__text">
+              For exhibitions, partnerships, or a quiet hello — a single email
+              is all it takes.
+            </p>
+            <ul class="contact__links">
+              <li>
+                <a href="mailto:Brucenemeth@outlook.com">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Brucenemeth@outlook.com
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -345,7 +425,12 @@
         <p class="footer__name">Bruce&nbsp;<span>Nemeth</span></p>
         <div class="footer__meta">
           <span class="footer__glyph" lang="fa" dir="rtl">تکرار</span>
+          <span class="footer__write">
+            Write — <a href="mailto:Brucenemeth@outlook.com">Brucenemeth@outlook.com</a>
+          </span>
           &copy; <span id="current-year"></span> Bruce Nemeth ·
+          <a href="showcase.html">Showcase</a> ·
+          <a href="about.html">About</a> ·
           <a href="#hero">Back to top ↑</a>
           <span class="footer__credit">
             Created by <a href="mailto:shaahin69@gmail.com">S&nbsp;K</a>
@@ -363,6 +448,7 @@
       defer
     ></script>
     <script src="js/main.js" defer></script>
+    <script src="js/hero.js" defer></script>
     <script src="js/lightbox.js" defer></script>
   </body>
 </html>
