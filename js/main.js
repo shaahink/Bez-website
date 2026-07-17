@@ -1,7 +1,6 @@
 /* ===========================================================================
    Bruce Nemeth — behaviour
-   Sections: Data · Works render · Nav · Reveal · Scrollspy · Parallax ·
-             Video facade · Init
+   Sections: Data · Works render · Nav · Reveal · Scrollspy · Video facade · Init
    =========================================================================== */
 
 /* ---------- Portfolio data -------------------------------------------------
@@ -220,33 +219,6 @@ function initScrollSpy() {
   sections.forEach((s) => io.observe(s));
 }
 
-/* ---------- Hero parallax (subtle, guarded) -------------------------------- */
-function initParallax() {
-  const img = document.querySelector("[data-parallax]");
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!img || reduce) return;
-
-  let ticking = false;
-  const update = () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight) {
-      img.style.transform = `translate3d(0, ${y * 0.18}px, 0) scale(1.06)`;
-    }
-    ticking = false;
-  };
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        window.requestAnimationFrame(update);
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
-  img.style.transform = "scale(1.06)";
-}
-
 /* ---------- Video facade: load the iframe only on click -------------------- */
 function initVideoFacade() {
   const facade = document.getElementById("video-facade");
@@ -272,7 +244,6 @@ function init() {
   initNav();
   initReveal();
   initScrollSpy();
-  initParallax();
   initVideoFacade();
 }
 

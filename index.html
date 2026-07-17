@@ -106,7 +106,9 @@
       <section class="hero" id="hero">
         <!-- Slideshow of the works: frames surface through a noise dissolve
              (js/hero.js). No controls by design — it is a room, not a widget. -->
-        <div class="hero__media" id="hero-slides" data-slideshow data-parallax>
+        <!-- No parallax here on purpose: transforming this layer on scroll made
+             trackpad scrolling feel like it was dragging the photo. -->
+        <div class="hero__media" id="hero-slides" data-slideshow>
           <img
             class="is-active"
             src="images/hero/hero-steps.jpg"
@@ -151,9 +153,10 @@
 
         <div class="shell hero__inner">
           <p class="eyebrow">Curation · Installation · Sound</p>
+          <!-- Both names, both scripts: Bruce / بهروز -->
           <h1 class="hero__name">
             <span>Bruce</span>
-            <span class="thin">Nemeth</span>
+            <span class="fa" lang="fa" dir="rtl">بهروز</span>
           </h1>
           <p class="hero__tagline">
             An interdisciplinary artist listening for the difference inside
@@ -382,10 +385,17 @@
               <p class="partner__role">Artist &amp; music composer</p>
             </div>
 
-            <!-- S K prefers to stay behind the curtain — a note, held in braces. -->
+            <!-- S K prefers to stay behind the curtain — a tiny terminal instead. -->
             <div class="partner partner--sk reveal" style="--i: 3">
-              <div class="partner__media" role="img" aria-label="No photograph — a musical note wrapped in code braces">
-                <span class="sk-glyph">{&hairsp;<span class="note">♪</span>&hairsp;}</span>
+              <div
+                class="partner__media sk-console"
+                role="img"
+                aria-label="No photograph — a small terminal window; whoami answers S K, then it plays a note at 432 hertz"
+              >
+                <pre class="sk-term" aria-hidden="true"><span class="sk-line sk-l1">$ whoami</span>
+<span class="sk-line sk-l2">S K</span>
+<span class="sk-line sk-l3">$ play 432hz <b>♪</b></span>
+<span class="sk-line sk-l4">$ <span class="sk-caret"></span></span></pre>
               </div>
               <p class="partner__name">S&nbsp;K</p>
               <p class="partner__role">Programming</p>
