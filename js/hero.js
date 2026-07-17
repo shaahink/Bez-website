@@ -29,14 +29,19 @@
 
   let current = 0;
   let busy = false;
+  let timer = 0;
 
-  /* Deferred sources: only the first frame loads eagerly. */
-  imgs.forEach((img) => {
-    if (img.dataset.src && !img.src) img.src = img.dataset.src;
-  });
+  const ctx = canvas && canvas.getContext ? canvas.getContext("2d") : null;
 
-  const ctx =
-    canvas && canvas.getContext ? canvas.getContext("2d") : null;
+  /* ---- Frames arrive one ahead of the cut ------------------------------- */
+  /* Five full-bleed photographs is a couple of megabytes. A phone should not
+     pay for frame five in order to look at frame one, so each is fetched
+     during the hold before it is needed. */
+  function preload(i) {
+    const img = imgs[i % imgs.length];
+    if (img && img.dataset.src && !img.src) img.src = img.dataset.src;
+  }
+  preload(1);
 
   /* ---- Noise field: coarse blobs + fine grain, built once ---------------- */
   const NW = 192, NH = 108;
@@ -83,14 +88,32 @@
   }
 
   /* ---- Canvas sizing (device pixels, capped for perf) -------------------- */
+  let cssW = 0, cssH = 0;
+
   function fit() {
-    if (!canvas) return;
+    if (!canvas) return false;
+    const w = media.clientWidth, h = media.clientHeight;
+    /* Resizing the canvas clears it, so only touch it when the box has really
+       changed. On a phone every scroll that hides the address bar fires a
+       resize at an identical width — refitting on those blanked the dissolve
+       mid-flight. */
+    if (w === cssW && h === cssH) return false;
+    cssW = w;
+    cssH = h;
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.width = Math.round(media.clientWidth * dpr);
-    canvas.height = Math.round(media.clientHeight * dpr);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    return true;
   }
   fit();
   window.addEventListener("resize", fit, { passive: true });
+
+  /* The crop lives in the stylesheet (--hero-focus-y on .hero__media); read it
+     back so the dissolve lands on exactly the framing the CSS is showing. */
+  function focusY() {
+    const v = parseFloat(getComputedStyle(media).getPropertyValue("--hero-focus-y"));
+    return Number.isFinite(v) ? v / 100 : 0.44;
+  }
 
   /* object-fit: cover, by hand, for drawImage */
   function drawCover(c, img) {
@@ -99,35 +122,49 @@
     if (!iw || !ih) return;
     const s = Math.max(cw / iw, ch / ih);
     const w = iw * s, h = ih * s;
-    c.drawImage(img, (cw - w) / 2, (ch - h) * 0.44, w, h);
+    c.drawImage(img, (cw - w) / 2, (ch - h) * focusY(), w, h);
   }
 
   const easeInOut = (p) => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2);
 
+  /* ---- The handover ------------------------------------------------------ */
+  /* When the canvas has run, it is already showing the incoming frame at full
+     strength — so the swap underneath it must be instantaneous. Letting the
+     CSS crossfade run here put both frames on screen at roughly half opacity
+     each for the length of the canvas fade-out: a double exposure, right at
+     the moment the dissolve was supposed to land. */
   function settle(next) {
+    const behindCanvas = ctx && canvas.classList.contains("is-showing");
+
+    if (behindCanvas) media.classList.add("is-cutting");
     imgs[current].classList.remove("is-active");
     next.classList.add("is-active");
     current = imgs.indexOf(next);
-    busy = false;
-    if (ctx) {
+
+    if (behindCanvas) {
+      void media.offsetWidth; // commit the cut before transitions come back
+      media.classList.remove("is-cutting");
       canvas.classList.remove("is-showing");
-      // clear after the canvas has faded from the compositor
-      setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 400);
+      // clear once the canvas has faded off the compositor
+      setTimeout(() => ctx.clearRect(0, 0, canvas.width, canvas.height), 500);
     }
+    busy = false;
   }
 
-  function transition() {
-    if (busy || document.hidden) return;
+  function transition(done) {
     busy = true;
     const next = imgs[(current + 1) % imgs.length];
 
     const ready = next.decode ? next.decode().catch(() => {}) : Promise.resolve();
     ready.then(() => {
-      if (!ctx || !maskData || FADE === 0) {
-        // fallback: CSS crossfade (opacity transition lives in the stylesheet)
+      // No canvas, no pixels, or reduced motion: the stylesheet's opacity
+      // transition carries the crossfade on its own.
+      if (!ctx || !maskData || FADE === 0 || !next.naturalWidth) {
         settle(next);
+        done();
         return;
       }
+      fit();
       canvas.classList.add("is-showing");
       const t0 = performance.now();
       (function frame(now) {
@@ -142,10 +179,34 @@
           requestAnimationFrame(frame);
         } else {
           settle(next);
+          done();
         }
       })(t0);
     });
   }
 
-  setInterval(transition, HOLD);
+  /* ---- Pacing ------------------------------------------------------------ */
+  /* A chain of timeouts rather than an interval: the hold starts when the
+     previous dissolve finishes, not on a clock that keeps ticking through it.
+     Nothing runs on a hidden tab. */
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(tick, HOLD);
+  }
+
+  function tick() {
+    if (busy) return;
+    if (document.hidden) {
+      schedule();
+      return;
+    }
+    preload(current + 2); // fetch the one after next during this dissolve
+    transition(schedule);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !busy) schedule();
+  });
+
+  schedule();
 })();

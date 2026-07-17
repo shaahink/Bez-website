@@ -175,16 +175,21 @@
 
       <!-- ================= Marquee ================= -->
       <div class="marquee" aria-hidden="true">
+        <!-- Two identical groups. The track slides by exactly one group, so
+             the seam is invisible — see .marquee__group in the stylesheet. -->
         <div class="marquee__track">
-          <span>Repetition is a myth</span><span class="dot">✳</span>
-          <span><b>تکرار</b></span><span class="dot">✳</span>
-          <span>Difference inhabits sameness</span><span class="dot">✳</span>
-          <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
-          <!-- duplicated for a seamless loop -->
-          <span>Repetition is a myth</span><span class="dot">✳</span>
-          <span><b>تکرار</b></span><span class="dot">✳</span>
-          <span>Difference inhabits sameness</span><span class="dot">✳</span>
-          <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
+          <div class="marquee__group">
+            <span>Repetition is a myth</span><span class="dot">✳</span>
+            <span><b>تکرار</b></span><span class="dot">✳</span>
+            <span>Difference inhabits sameness</span><span class="dot">✳</span>
+            <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
+          </div>
+          <div class="marquee__group">
+            <span>Repetition is a myth</span><span class="dot">✳</span>
+            <span><b>تکرار</b></span><span class="dot">✳</span>
+            <span>Difference inhabits sameness</span><span class="dot">✳</span>
+            <span>What appears cyclical reveals itself as spiral</span><span class="dot">✳</span>
+          </div>
         </div>
       </div>
 
@@ -220,7 +225,7 @@
       <section class="about" id="about">
         <div class="shell">
           <p class="eyebrow reveal">About the artist</p>
-          <div class="about__grid" style="margin-top: 2.5rem">
+          <div class="about__grid">
             <figure class="about__portrait reveal">
               <img
                 src="images/bruce-main.JPG"
@@ -266,9 +271,7 @@
           <div class="works__head">
             <div class="reveal">
               <p class="eyebrow">Selected Works</p>
-              <h2 class="section-title" style="margin-top: 1rem">
-                Gestures that <em>refuse</em> to repeat
-              </h2>
+              <h2 class="section-title">Gestures that <em>refuse</em> to repeat</h2>
             </div>
             <p class="works__count reveal" style="--i: 1">Two projects · Moving image</p>
           </div>
@@ -303,7 +306,7 @@
         <div class="shell">
           <div class="film__head reveal">
             <p class="eyebrow">Moving Image</p>
-            <h2 class="section-title" style="margin-top: 1rem">On screen, in time</h2>
+            <h2 class="section-title">On screen, in time</h2>
           </div>
 
           <div class="film__frame reveal" style="--i: 1">
@@ -370,7 +373,7 @@
             </div>
 
             <div class="partner reveal" style="--i: 2">
-              <div class="partner__media">
+              <div class="partner__media partner__media--high">
                 <img
                   src="images/partners/behrooz.jpg"
                   alt="Behrooz, standing before weathered rocks in the mist"
@@ -378,7 +381,6 @@
                   height="629"
                   loading="lazy"
                   decoding="async"
-                  style="object-position: 50% 18%"
                 />
               </div>
               <p class="partner__name">Behrooz</p>

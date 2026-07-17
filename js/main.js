@@ -96,9 +96,17 @@ function initWorks() {
         `Open image ${index + 1} of ${item.images.length} from ${item.title}`
       );
 
+      // The cell's ratio, declared up front. The stylesheet sizes each cell
+      // from --ar, so it holds its exact box before the photograph decodes —
+      // otherwise the strip starts as a row of zero-width cells and every
+      // lazy image snaps it open again as it lands.
+      cell.style.setProperty("--ar", `${image.w} / ${image.h}`);
+
       const img = document.createElement("img");
       img.src = image.src;
       img.alt = `${item.title} — image ${index + 1}`;
+      img.width = image.w;
+      img.height = image.h;
       img.loading = "lazy";
       img.decoding = "async";
       img.dataset.pswpWidth = image.w;
@@ -131,16 +139,25 @@ function initWorks() {
     chapter.appendChild(wrap);
     container.appendChild(chapter);
 
-    const step = () => {
-      const first = gallery.querySelector(".gallery-item");
-      return (first ? first.getBoundingClientRect().width : 320) + 20;
+    // Step to the next frame edge rather than by a fixed distance: the cells
+    // are all different widths, so one "frame" is not one number.
+    const goTo = (dir) => {
+      const x = gallery.scrollLeft;
+      const edges = Array.from(
+        gallery.querySelectorAll(".gallery-item"),
+        (c) => c.offsetLeft
+      );
+      const target =
+        dir > 0
+          ? edges.find((e) => e > x + 2)
+          : edges.reverse().find((e) => e < x - 2);
+      gallery.scrollTo({
+        left: target ?? (dir > 0 ? gallery.scrollWidth : 0),
+        behavior: "smooth",
+      });
     };
-    prev.addEventListener("click", () =>
-      gallery.scrollBy({ left: -step(), behavior: "smooth" })
-    );
-    next.addEventListener("click", () =>
-      gallery.scrollBy({ left: step(), behavior: "smooth" })
-    );
+    prev.addEventListener("click", () => goTo(-1));
+    next.addEventListener("click", () => goTo(1));
   });
 }
 
